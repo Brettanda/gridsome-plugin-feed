@@ -2,6 +2,8 @@ const path = require('path')
 const url = require('url')
 const fs = require('fs-extra')
 const Feed = require('feed').Feed
+let showdown = require('showdown')
+let converter = new showdown.Converter()
 const moment = require('moment')
 
 function urlWithBase (path, base, enforceTrailingSlashes) {
@@ -136,6 +138,8 @@ module.exports.defaultOptions = () => ({
 	nodeToFeedItem: node => ({
 		title: node.title,
 		date: node.date || node.fields.date,
-		content: node.content
+		image: node.cover_image || node.cover_image.src,
+		description: node.description,
+		content: converter.makeHtml(node.content)
 	})
 })
