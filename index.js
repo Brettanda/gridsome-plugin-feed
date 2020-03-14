@@ -138,7 +138,6 @@ module.exports.defaultOptions = () => ({
 	nodeToFeedItem: node => ({
 		title: node.title,
 		date: node.date || node.fields.date,
-		image: node.cover_image || node.cover_image.src,
 		description: node.description,
 		content: converter.makeHtml(node.content)
 	})
