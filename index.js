@@ -76,6 +76,10 @@ module.exports = function (api, options) {
 				const feedItem = options.nodeToFeedItem(node)
 				feedItem.id = urlWithBase(pathPrefix + node.path, siteUrl, options.enforceTrailingSlashes)
 				feedItem.link = feedItem.id
+				// var date = new Date(feedItem.date).toLocaleString("en-US", { timeZone: "America/Denver"});
+				// var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
+				feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: "America/Denver" }));
+				console.log("Item date: " + new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: "America/Denver" })));
 				return feedItem
 			})
 			feedItems.push(...items)
