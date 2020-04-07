@@ -2,8 +2,6 @@ const path = require('path')
 const url = require('url')
 const fs = require('fs-extra')
 const Feed = require('feed').Feed
-// let showdown = require('showdown')
-// let converter = new showdown.Converter()
 const moment = require('moment')
 
 function urlWithBase (path, base, enforceTrailingSlashes) {
@@ -76,9 +74,9 @@ module.exports = function (api, options) {
 				const feedItem = options.nodeToFeedItem(node)
 				feedItem.id = urlWithBase(pathPrefix + node.path, siteUrl, options.enforceTrailingSlashes)
 				feedItem.link = feedItem.id
-				// var date = new Date(feedItem.date).toLocaleString("en-US", { timeZone: "America/Denver"});
-				// var now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
-				feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: "America/Denver" }));
+				// feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: feedOptions.timeZone }));
+				// feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: feedOptions.timeZone }));
+				// console.log(feedItem.date);
 				return feedItem
 			})
 			feedItems.push(...items)
@@ -134,6 +132,7 @@ module.exports.defaultOptions = () => ({
 		enabled: false,
 		output: '/feed.json'
 	},
+// 	timeZone: "America/Denver",
 	maxItems: 25,
 	htmlFields: ['description', 'content'],
 	enforceTrailingSlashes: false,
