@@ -74,9 +74,6 @@ module.exports = function (api, options) {
 				const feedItem = options.nodeToFeedItem(node)
 				feedItem.id = urlWithBase(pathPrefix + node.path, siteUrl, options.enforceTrailingSlashes)
 				feedItem.link = feedItem.id
-				// feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: feedOptions.timeZone }));
-				// feedItem.date = new Date(new Date(feedItem.date).toLocaleString("en-US", { timeZone: feedOptions.timeZone }));
-				// console.log(feedItem.date);
 				return feedItem
 			})
 			feedItems.push(...items)
@@ -132,7 +129,6 @@ module.exports.defaultOptions = () => ({
 		enabled: false,
 		output: '/feed.json'
 	},
-// 	timeZone: "America/Denver",
 	maxItems: 25,
 	htmlFields: ['description', 'content'],
 	enforceTrailingSlashes: false,
@@ -140,9 +136,8 @@ module.exports.defaultOptions = () => ({
 	nodeToFeedItem: node => ({
 		title: node.title,
 		date: node.date || node.fields.date,
-		image: "https://developerbacon.ca/images/" + node.cover_image_file || node.cover_image.src,
+		image: node.cover_image.src,
 		description: node.description,
-		// content: converter.makeHtml(node.content)
 		content: node.content
 	})
 })
